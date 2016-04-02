@@ -1,0 +1,6 @@
+
+help(). % display help
+q().    % quit
+<C-g>   % interrupt
+      h % show interrupt help
+      q % quit

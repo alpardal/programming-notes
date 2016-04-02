@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+tmux -2 new-session -d
+tmux split-window -v
+
+tmux select-pane -t 0
+tmux send-keys "echo A command in another pane" C-m
+
+tmux select-pane -t 1
+tmux send-keys "echo Listing files:;ls" C-m
+
+echo  Tmux session created.

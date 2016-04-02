@@ -1,0 +1,11 @@
+<c-t> transpose chars
+<c-g> abort current line, exit backward history search
+<m-d> delete next word
+<c-y> yank last deletion
+<m-u> uppercase next word and move over it
+<m-l> lowercase next word and move over it
+<m-h> help for current cmd
+
+<m-q> clear line and re-enter content after next cmd finishes
+<c-o> run cmd then fill line w/ next history entry.
+      can be used to alternate 2 cmds

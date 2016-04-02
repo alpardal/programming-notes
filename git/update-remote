@@ -1,0 +1,3 @@
+
+git remote update
+git remote update --prune
