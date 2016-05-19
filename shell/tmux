@@ -1,0 +1,22 @@
+Windows
+
+  c        create window
+  ,        name window
+  w        list windows
+  n        next window
+  p        previous window
+  <number> move to window number <number>
+
+Panes
+
+  o       go to next pane
+  <c-o>   swap panes
+  q       show pane numbers
+  <space> toggle between layouts
+  z       toggle pane zoom
+
+  :break-pane pane-to-window
+
+Misc
+
+  ? list all keybindings
