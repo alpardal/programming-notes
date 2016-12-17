@@ -1,0 +1,16 @@
+
+
+(<$>) :: Functor t     =>   (a -> b) -> (t a -> t b)
+(<*>) :: Applicative t => t (a -> b) -> (t a -> t b)
+
+(=<<) :: Monad t       => (a -> t b) -> (t a -> t b)
+(>>=) :: Monad t       => t a -> (a -> t b) -> t b
+
+
+The type of fmap ensures that it is impossible to use it to change the context, no matter which function it is given. In (a -> b) -> t a -> t b, the (a -> b) function has nothing to do with the t context of the t a functorial value, and so applying it cannot affect the context. For that reason, if you do fmap f xs on some list xs the number of elements of the list will never change.
+
+The t (a -> b) morphism carries a context of its own, which is combined with that of the t a functorial value. (<*>), however, is subject to a more subtle restriction. While t (a -> b) morphisms carry context, within them there are plain (a -> b), which are still unable to modify the context. That means the changes to the context (<*>) performs are fully determined by the context of its arguments, and the values have no influence over the resulting context.
+Thus with list (<*>) you know that the length of the resulting list will be the product of the lengths of the original lists, with IO (<*>) you know that all real world effect will happen as long as the evaluation terminates, and so forth.
+
+With Monad, however, we are in a very different game. (>>=) takes a (a -> t b) function, and so it is able to create context from values. That means a lot of flexibility.
+Taking advantage of the extra flexibility, however, might mean having less guarantees about, for instance, whether your functions are able to unexpectedly erase parts of a data structure for pathological inputs, or whether the control flow in your application remains intelligible. In some situations there might be performance implications as well, as the complex data dependencies monadic code makes possible might prevent useful refactorings and optimisations. All in all, it is a good idea to only use as much power as needed for the task at hand. If you do need the extra capabilities of Monad, go right ahead; however, it is often worth it to check whether Applicative or Functor are sufficient.

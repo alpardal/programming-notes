@@ -1,0 +1,13 @@
+
+# in an interactive rebase:
+
+ `git rebase -i <ref>`
+
+# choose `e` to edit a commit
+# and then ammend the commit with:
+
+ `git commit --amend --reset-author --no-edit`
+
+# continue rebasing:
+
+ `git rebase --continue`
