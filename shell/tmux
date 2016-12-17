@@ -6,6 +6,8 @@ Windows
   n        next window
   p        previous window
   <number> move to window number <number>
+  # swaps current window with window 1
+  :swap-window -t -1
 
 Panes
 
