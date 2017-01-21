@@ -1,0 +1,36 @@
+Windows
+
+  c         create window
+  ,         name window
+  w         list windows
+  n         next window
+  p         previous window
+  l         last selected window
+  <number>  move to window number <number>
+  &         kill current window
+
+  # swaps current window with window 1
+  :swap-window -t1
+
+Panes
+
+  o       go to next pane
+  <c-o>   swap panes
+  q       show pane numbers
+  <space> toggle between layouts
+  z       toggle pane zoom
+
+  :break-pane pane-to-window
+
+Sessions
+
+  (   attach to previous session
+  )   attach to next session
+  L   switch to last attached session
+  s   select session interactively
+  $   rename session
+
+Misc
+
+  ? list all keybindings
+
