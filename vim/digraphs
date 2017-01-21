@@ -1,4 +1,5 @@
-// enter digraph with i_CTRL_K
+" enter digraph with i_CTRL_K
+" :h digraph-table
 
 √  -> 'RT'
 →  -> '->'

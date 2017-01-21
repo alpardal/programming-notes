@@ -1,0 +1,38 @@
+
+/* html:
+ *
+ * <ul>
+ *   <li></li>
+ *   <li></li>
+ * </ul>
+ *
+ */
+
+ul {
+  display: flex; /* || inline-flex */
+  /* makes ul a flex container and li's flex items */
+
+  /* defines `main axis` and `cross axis`: */
+  flex-direction: row; /* || column || row-reverse || column-reverse */
+
+  flex-wrap: wrap; /* || no-wrap || wrap-reverse */
+
+  /* shorthand for direction + wrap: */
+  flex-flow: row wrap;
+
+  /* defines how flex items are laid out on the main axis: */
+  justify-content: flex-start;
+    /* || flex-end || center || space-between || space-around */
+
+  /* defines how flex-items are laid out on the cross axis: */
+  align-items: flex-start;
+    /* || flex-end || center || stretch || baseline */
+
+  /* controls how the flex-items are aligned in a multi-line flex container: */
+  align-content: flex-start; /* || flex-end || center || stretch || */
+}
+
+li {
+  /* flex items are re-ordered based on the order property, from low to high: */
+  order: 0; /* default value */
+}

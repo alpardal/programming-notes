@@ -21,3 +21,9 @@
   m >>= return     =  m                        -- right unit
   return x >>= f   =  f x                      -- left unit
   (m >>= f) >>= g  =  m >>= (\x -> f x >>= g)  -- associativity
+
+  -- in terms of >=>:
+
+    return >=> g     =  g
+    g >=> return     =  g
+    (g >=> h) >=> k  =  g >=> (h >=> k)
