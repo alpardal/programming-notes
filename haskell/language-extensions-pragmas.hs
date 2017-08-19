@@ -1,4 +1,4 @@
-{-# LANGUAGE NamedFieldPuns
+{-# LANGUAGE NamedFieldPuns,
              LambdaCase      #-}
 
 import Data.List (dropWhile)
