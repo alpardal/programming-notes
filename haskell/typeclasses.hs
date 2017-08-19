@@ -17,7 +17,7 @@ class Eq a => Ord a where -- Ord is subclass of Eq
   compare :: a -> a -> Ordering
   -- ...
 
--- instance with qualified type:
+-- instance with qualified type (`a` has instance for `Eq`):
 instance Eq a => Eq [a] where
   []     == []     = True
   (x:xs) == (y:ys) = x == y && xs == ys

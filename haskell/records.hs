@@ -1,15 +1,17 @@
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE RecordWildCards #-}
 
+import Data.Monoid
+
 data Person = Person { firstName :: String
-                     ,  lastName :: String } deriving Show
+                     , lastName :: String } deriving Show
 
 greet :: Person -> String
 greet (Person { firstName = name }) = "Hi, " <> name <> "!"
 
 -- or, using 'NamedFieldPuns':
 punnedGreet :: Person -> String
-punnedreet (Person { firstName }) = "Hi, " <> firstName <> "!"
+punnedGreet (Person { firstName }) = "Hi, " <> firstName <> "!"
 
 -- or, with 'RecordWildCards':
 wildGreet :: Person -> String
