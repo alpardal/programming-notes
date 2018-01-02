@@ -1,3 +1,4 @@
+begin;
 
 create table users(
   id serial primary key,
@@ -32,4 +33,4 @@ select id, name, lag(name, 1) over w as prev,
   from users window w as (order by id) order by id;
 
 
-drop table users;
+rollback;
