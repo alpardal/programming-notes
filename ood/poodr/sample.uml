@@ -1,0 +1,52 @@
+
+     ┌────────┐                                         ┌───────┐
+     │  moe   │                                         │ class │
+     │Customer│                                         │ Trip  │
+     └───┬────┘                                         └───┬───┘
+         │suitable_trips(on_date, of_difficulty, need_bike)┌┴┐
+         │ ───────────────────────────────────────────────>│ │
+         │                                                 │ │
+         │                                                 │ │
+         │ <─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│ │
+         │                                                 └┬┘
+         │────┐                                             │
+         │    │ ok                                          │
+         │<───┘                                             │
+         │                                                  │
+         │                                                  │
+         │                   ╔═════════╗                    │
+═════════╪═══════════════════╣ divider ╠════════════════════╪═════════
+         │                   ╚═════════╝                    │
+         │                                                  │
+         │                                ╔════════════════╗│
+         │                                ║this is a note ░║│
+         │                                ╚════════════════╝│
+         │                                                  │
+         │                                                  │
+         │                                                  │
+         │                                                  │
+   Done  │                                                  │
+ <────────                                                  │
+     ┌───┴────┐                                         ┌───┴───┐
+     │  moe   │                                         │ class │
+     │Customer│                                         │ Trip  │
+     └────────┘                                         └───────┘
+
+@startuml
+
+participant "  moe  \nCustomer" as moe
+participant " class \n Trip " as Trip
+
+moe -> Trip : suitable_trips(on_date, of_difficulty, need_bike)
+activate Trip
+moe <-- Trip
+deactivate Trip
+moe -> moe : ok
+== divider ==
+note left of Trip: this is a note
+|||
+[<- moe: Done
+
+@enduml
+
+syntax: http://plantuml.com/sequence-diagram
