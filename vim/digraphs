@@ -1,5 +1,17 @@
 " enter digraph with i_CTRL_K
 " :h digraph-table
+" :digraphs"
+
+" Português:
+
+- {á,é,í,ó,ú} -> {a,e,i,o,u} + "'"
+- {â..û}   -> {a..u} + ">"
+- {ã..ũ}   -> {a..u} + "?"
+- {à..ù}   -> {a..u} + "`"
+- ç -> 'c,'
+
+
+" Symbols:
 
 √  -> 'RT'
 →  -> '->'
