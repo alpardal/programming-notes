@@ -24,4 +24,9 @@ insert into users (name, age, hobbies) values
 select array_agg(distinct age) from users;
 select * from users where hobbies @> array['movie watching'];
 
+-- select ids with hobby matching predicate (~ `Enumerable#select`)
+select distinct id from (
+  select id, hobbies, generate_subscripts(hobbies, 1) as i from users
+) as user_ids where hobbies[i] between 'a' and 'b';
+
 drop table users;

@@ -21,6 +21,7 @@ Panes
   z       toggle pane zoom
 
   :break-pane pane-to-window
+  :join-pane -s :1
 
 Sessions
 
