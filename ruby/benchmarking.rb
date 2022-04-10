@@ -27,14 +27,12 @@ StackProf.run(mode: :cpu, out: 'results_file.dump') do
   5000.times { puts 'should test something...' }
 end
 
-exit
-
 # view profiling result:
-# $ stackprof results_file.dump --text
-
+puts `stackprof results_file.dump --text`
+`rm results_file.dump`
 
 # counting created objects:
-GC.stat(:total_allocated_object)
+# GC.stat(:total_allocated_object)
 
 # with gem: allocation_tracer(github.com/ko1/allocation_tracer)
 require 'allocation_tracer'
@@ -44,4 +42,4 @@ ObjectSpace::AllocationTracer.trace do
     ['foo', {}]
   }
 end
-ObjectSpace::AllocationTracer.allocated_count_table
+puts ObjectSpace::AllocationTracer.allocated_count_table
