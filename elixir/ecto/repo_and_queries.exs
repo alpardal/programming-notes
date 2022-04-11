@@ -16,7 +16,7 @@ defmodule Ecto.RepoAndQueryExamples do
     # or:
     Repo.all(from(u in User, select: u))
     # bindings not need with a single `from`:
-    Repo.one from User, limit: 1
+    Repo.one(from(User, limit: 1))
     # returns list of User structs, w/ only the email populated
     Repo.all(from(User, select: [:email]))
     # returns a list of maps w/ single email key:
@@ -170,6 +170,7 @@ defmodule Ecto.RepoAndQueryExamples do
         where: r.name == "Admin"
       )
     )
+
     # same as:
     Repo.all(
       from(u in User,
@@ -178,6 +179,20 @@ defmodule Ecto.RepoAndQueryExamples do
         where: r.name == "Admin"
       )
     )
+
+    # ex 2:
+    album_count_per_artist =
+      from(
+        a in Artist,
+        join: b in Album,
+        on: a.id == b.artist_id,
+        order_by: [asc: a.name],
+        group_by: a.name,
+        select: [a.name, count()]
+      )
+
+    Repo.all(album_count_per_artist)
+
     # other types of joins available are:
     #   `left_join`, `right_join`, `cross_join`, `full_join`
   end
@@ -197,7 +212,7 @@ defmodule Ecto.RepoAndQueryExamples do
     )
 
     # ex2:
-    query =
+    album_track_titles =
       from(t in Track,
         join: a in Album,
         on: t.album_id == a.id,
@@ -205,7 +220,7 @@ defmodule Ecto.RepoAndQueryExamples do
         group_by: [a.title]
       )
 
-    Repo.all(query)
+    Repo.all(album_track_titles)
   end
 
   def preloading do
@@ -232,6 +247,8 @@ defmodule Ecto.RepoAndQueryExamples do
     Repo.one(from(u in User, select: count(u.id)))
     # and:
     Repo.aggregate("users", :count, :id)
+    # :id is optional:
+    Repo.aggregate("users", :count)
 
     # limiting:
     # tries to get the age average for the last 5 users to register,
@@ -303,8 +320,8 @@ defmodule Ecto.RepoAndQueryExamples do
     Repo.all(from([_al, _ar, track] in miles_tracks, select: track.title))
 
     # using named bindings:
-    temps = from Measurement, as: :temp, where: [type: "temperature"]
-    Repo.one from [temp: t] in temps, where: t.value == 12.8, limit: 1
+    temps = from(Measurement, as: :temp, where: [type: "temperature"])
+    Repo.one(from([temp: t] in temps, where: t.value == 12.8, limit: 1))
     # named bindings in joins:
     miles_albums3 =
       from(a in Album,
@@ -323,8 +340,8 @@ defmodule Ecto.RepoAndQueryExamples do
     Ecto.Query.has_named_binding?(miles_tracks3, :albums)
 
     # late binding with `as`:
-    query = from m in Measurement, join: d in assoc(m, :device), as: :device
-    Repo.all from m in query, where: m.value == 12.8, where: as(:device).id == 1
+    query = from(m in Measurement, join: d in assoc(m, :device), as: :device)
+    Repo.all(from(m in query, where: m.value == 12.8, where: as(:device).id == 1))
 
     # or_where:
     miles_or_evans_albums =
