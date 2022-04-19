@@ -1,4 +1,6 @@
 defmodule Ecto.RepoAndQueryExamples do
+  import Ecto.Query
+  import Ecto, only: [assoc: 2]
   # https://hexdocs.pm/ecto/Ecto.Query.API.html
 
   def loading_records do
@@ -137,14 +139,6 @@ defmodule Ecto.RepoAndQueryExamples do
     )
   end
 
-  def loading_association_data do
-    # Get all comments for the given post
-    Repo.all(assoc(post, :comments))
-    # Or build a query on top of the associated comments
-    query = from(c in assoc(post, :comments), where: not is_nil(c.title))
-    Repo.all(query)
-  end
-
   def delete do
     query = from("users", where: [id: 3])
     Repo.delete_all(query)
@@ -164,6 +158,7 @@ defmodule Ecto.RepoAndQueryExamples do
   end
 
   def joins do
+    # loads user + associated role in a single query:
     Repo.all(
       from(u in User,
         join: r in assoc(u, :role),
@@ -221,6 +216,15 @@ defmodule Ecto.RepoAndQueryExamples do
       )
 
     Repo.all(album_track_titles)
+  end
+
+  def loading_associated_records do
+    # Get all comments for the given post
+    Repo.all(assoc(post, :comments))
+    # Or build a query on top of the associated comments
+    query = from(c in assoc(post, :comments), where: not is_nil(c.title))
+    Repo.all(query)
+    # use assoc + join for loading everything in single query - see `preloading` below
   end
 
   def preloading do

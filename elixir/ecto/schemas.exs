@@ -2,6 +2,9 @@ defmodule Ecto.SchemaExamples do
   use Ecto.Schema
   alias MusicDB.{Artist, Track, Genre, AlbumGenre}
 
+  # don't add a pk:
+  # @primary_key false
+
   schema "albums" do
     field(:title, :string)
     # array field
@@ -12,6 +15,10 @@ defmodule Ecto.SchemaExamples do
     field(:password, :string, virtual: true)
     # should be read from the db (e.g. autoincremented values)
     field(:global_position, :integer, read_after_writes: true)
+    # custom primary key:
+    field(:the_id_col, :id, primary_key: true)
+    # or for db-generated values:
+    field(:the_id_col, :autogenerate, primary_key: true)
     timestamps()
 
     belongs_to(:artist, Artist)

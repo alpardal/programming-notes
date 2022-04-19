@@ -4,7 +4,11 @@ defmodule MigrationSnippets do
       add :title, :string, null: false
       add :description, :text, null: false, default: ""
       add :year, :integer
-      add :artist_id, references(:artists), null: false
+      add :artist_id, references(:artists, on_delete: :delete_all), null: false
+      # other values for `on_delete`:  :nilify_all, :restrict and :nothing (the default)
+      # `on_update` is also supported for when the reference changes
+
+
       timestamps()  # adds `inserted_at` & `updated_at` cols
       # only add `inserted_at`:
       timestamps(updated_at: false)
