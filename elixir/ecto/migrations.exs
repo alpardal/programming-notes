@@ -5,11 +5,11 @@ defmodule MigrationSnippets do
       add :description, :text, null: false, default: ""
       add :year, :integer
       add :artist_id, references(:artists, on_delete: :delete_all), null: false
-      # other values for `on_delete`:  :nilify_all, :restrict and :nothing (the default)
-      # `on_update` is also supported for when the reference changes
+      # other values for `on_delete`: :nilify_all, :restrict and :nothing
+      # (the default) `on_update` is also supported for when the reference changes
 
-
-      timestamps()  # adds `inserted_at` & `updated_at` cols
+      # adds `inserted_at` & `updated_at` cols:
+      timestamps()
       # only add `inserted_at`:
       timestamps(updated_at: false)
     end
@@ -76,6 +76,7 @@ defmodule MigrationSnippets do
   end
 
   def custom_pk do
+    # see ../phoenix/uuids.exs for more info on custom pks
     create table("some_table", primary_key: false) do
       add :code, :string, primary_key: true
       add :some_id, references("other_table", column: :code, type: :string)
