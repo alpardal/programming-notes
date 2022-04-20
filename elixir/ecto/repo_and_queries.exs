@@ -358,13 +358,16 @@ defmodule Ecto.RepoAndQueryExamples do
   end
 
   def transactions do
-    Repo.transaction do
-      # usually you'll rely on Ecto.Multi, but if you run manual db
-      # changes here, be sure to only run operations that raise on
-      # failure so the transaction actually gets rolled back
+    # using an anonymous fn:
+    Repo.transaction(fn ->
+      # use `!` version of functions to make sure we rollback on errors
+      Repo.insert!(record1)
+      Repo.insert!(record2)
+      # or roll back manually if needed:
       Repo.rollback("reason")
-      # ^ manually rolling back if needed - the return value will be:
-      #     {:error, "reason"}
-    end
+      # ^ the return value will be: `{:error, "reason"}`
+    end)
+
+    # usually you'll be better off using Ecto.Multi
   end
 end
